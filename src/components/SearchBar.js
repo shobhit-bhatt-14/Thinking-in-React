@@ -27,7 +27,7 @@ const SearchBar = (props) => {
           className="form-check-input"
           onChange={handleInStockChange}
         />
-        <label class="form-check-label">
+        <label className="form-check-label">
           &nbsp;Only show products in stock
         </label>
       </div>

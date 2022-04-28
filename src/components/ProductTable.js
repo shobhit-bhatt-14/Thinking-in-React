@@ -7,12 +7,25 @@ const ProductTable = (props) => {
   let lastCategory = null;
 
   props.products.map((product) => {
+    let p = product.price.match(/\d+/g);
+    let q = props.filterText;
+    q += ".00";
+    q = q.match(/\d+/g);
+
     if (/^[a-zA-Z\s]+$/.test(props.filterText)) {
       if (product.name.toLowerCase().indexOf(props.filterText.toLowerCase()) == -1)
         return;
-    } else if (/^[<>]+[0-9]+$/.test(props.filterText)) {
+    } else if (props.filterText.charAt(0) == ">") {
+      if (parseFloat(p[0] + "." + p[1]) < parseFloat(q[0] + "." + q[1]).toFixed(2))
         return;
-    } else if (/^[0-9]+[<>]+$/.test(props.filterText)) {
+    } else if (props.filterText.charAt(0) == "<") {
+      if (parseFloat(p[0] + "." + p[1]) > parseFloat(q[0] + "." + q[1]).toFixed(2))
+        return;
+    } else if (props.filterText.charAt(props.filterText.length - 1) == ">") {
+      if (parseFloat(p[0] + "." + p[1]) > parseFloat(q[0] + "." + q[1]).toFixed(2))
+        return;
+    } else if (props.filterText.charAt(props.filterText.length - 1) == "<") {
+      if (parseFloat(p[0] + "." + p[1]) < parseFloat(q[0] + "." + q[1]).toFixed(2))
         return;
     }
 

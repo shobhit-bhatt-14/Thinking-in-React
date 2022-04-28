@@ -7,14 +7,21 @@ const ProductTable = (props) => {
   let lastCategory = null;
 
   props.products.map((product) => {
-    if(product.name.toLowerCase().indexOf(props.filterText.toLowerCase()) == -1)
-      return;
-      
-    if(props.inStock && !product.stocked)
-      return;
+    if (!Number.isInteger(Number(props.filterText))) {
+      if (product.name.toLowerCase().indexOf(props.filterText.toLowerCase()) == -1)
+        return;
+    } else {
+    }
+
+    if (props.inStock && !product.stocked) return;
 
     if (product.category != lastCategory) {
-      rows.push(<ProductCategoryRow key={product.category} category={product.category} />);
+      rows.push(
+        <ProductCategoryRow
+          key={product.category}
+          category={product.category}
+        />
+      );
       lastCategory = product.category;
     }
 

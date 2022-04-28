@@ -12,7 +12,7 @@ const App = () => {
   ];
 
   return (
-    <div className="d-flex justify-content-center">
+    <div className="d-flex justify-content-center rounded bg-white p-2">
       <FilterableProductTable products={PRODUCTS} />
     </div>
   );

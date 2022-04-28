@@ -7,10 +7,13 @@ const ProductTable = (props) => {
   let lastCategory = null;
 
   props.products.map((product) => {
-    if (!Number.isInteger(Number(props.filterText))) {
+    if (/^[a-zA-Z\s]+$/.test(props.filterText)) {
       if (product.name.toLowerCase().indexOf(props.filterText.toLowerCase()) == -1)
         return;
-    } else {
+    } else if (/^[<>]+[0-9]+$/.test(props.filterText)) {
+        return;
+    } else if (/^[0-9]+[<>]+$/.test(props.filterText)) {
+        return;
     }
 
     if (props.inStock && !product.stocked) return;
